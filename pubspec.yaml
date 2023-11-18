@@ -1,0 +1,39 @@
+name: ccalender
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  confetti: ^0.7.0
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  logging: ^1.2.0
+  provider: ^6.0.5
+  shared_preferences: ^2.2.2
+
+dev_dependencies:
+  flutter_lints: ^3.0.0
+  flutter_test:
+    sdk: flutter
+
+  intl: ^0.18.0
+  intl_utils: ^2.6.1
+
+flutter:
+  uses-material-design: true
+
+  fonts:
+    - family: MountainsOfChristmas
+      fonts:
+        - asset: assets/fonts/mountains_of_christmas/MountainsofChristmas-Bold.ttf
+        - asset: assets/fonts/mountains_of_christmas/MountainsofChristmas-Regular.ttf
+
+flutter_intl:
+  enabled: true
