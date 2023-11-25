@@ -3,5 +3,10 @@
   "failedToLoad": "ops, something went wrong, try again.",
   "close": "Close",
   "title": "Nessa's Christmas Calendar",
-  "@_EOF": {}
+  "allTimeRemaining": "{days} {days,plural, =1{day} other{days}} {hours} {hours,plural, =1{hour} other{hours}} {minutes} {minutes,plural, =1{minute} other{minutes}} {seconds} {seconds,plural, =1{second} other{seconds}}",
+  "hoursRemaining": "{hours} {hours,plural, =1{hour} other{hours}} {minutes} {minutes,plural, =1{minute} other{minutes}} {seconds} {seconds,plural, =1{second} other{seconds}}",
+  "minutesRemaining": "{minutes} {minutes,plural, =1{minute} other{minutes}} {seconds} {seconds,plural, =1{second} other{seconds}}",
+  "secondsRemaining": "{seconds} {seconds,plural, =1{second} other{seconds}}",
+  "opensIn": "First box can be opened in",
+  "@_EOF": {} 
 }

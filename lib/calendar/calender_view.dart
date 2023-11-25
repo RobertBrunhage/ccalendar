@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:ccalender/generated/l10n.dart';
@@ -22,6 +23,9 @@ class CalendarView extends StatefulWidget {
 }
 
 class _CalendarViewState extends State<CalendarView> {
+  late Timer _timer;
+  DateTime currentDate = DateTime.now();
+
   List<Box> boxes = [
     Box(openedText: 'Sale on gumroad 15% off on 5 avatars'),
     Box(openedText: '15% off total price on commission 2 slots'),
@@ -67,6 +71,11 @@ class _CalendarViewState extends State<CalendarView> {
   @override
   void initState() {
     super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        currentDate = DateTime.now();
+      });
+    });
     constantSnowController.play();
     for (int i = 0; i < 25; i++) {
       final isOpened =
@@ -161,63 +170,81 @@ class _CalendarViewState extends State<CalendarView> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 40.0),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.count(
-                crossAxisCount: 5,
-                mainAxisSpacing: 8.0,
-                crossAxisSpacing: 8.0,
+          if (currentDate.month == 12)
+            Expanded(
+              child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                children: List.generate(
-                  25,
-                  (index) {
-                    DateTime currentDate = DateTime.now();
-                    bool isOpenable =
-                        currentDate.month == 11 && currentDate.day >= index + 1;
-                    final date = boxes[index];
+                child: GridView.count(
+                  crossAxisCount: 5,
+                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 8.0,
+                  padding: const EdgeInsets.all(8.0),
+                  children: List.generate(
+                    25,
+                    (index) {
+                      bool isOpenable = currentDate.month == 12 &&
+                          currentDate.day >= index + 1;
+                      final date = boxes[index];
 
-                    return CalendarBox(
-                      onTap: () {
-                        if (isOpenable) {
-                          _setDateOpened(index);
-                          _showConfettiDialog(context, date.openedText);
-                        }
-                      },
-                      boxColor: (isHovering) {
-                        if (isHovering) {
-                          return Colors.red.shade800;
-                        } else if (date.isOpened) {
-                          return Colors.red.shade900;
-                        } else {
-                          return Colors.red.shade700;
-                        }
-                      },
-                      borderColor: Colors.amber,
-                      child: Builder(builder: (context) {
-                        if (date.isOpened) {
-                          return const Icon(
-                            Icons.done_rounded,
-                            size: 30,
-                            color: Colors.amber,
-                          );
-                        } else {
-                          return Text(
-                            '${index + 1}',
-                            style: Styles$Texts.xxxlMedium.copyWith(
-                              color:
-                                  date.isOpened ? Colors.black : Colors.amber,
-                            ),
-                            textAlign: TextAlign.center,
-                          );
-                        }
-                      }),
-                    );
-                  },
+                      return CalendarBox(
+                        onTap: () {
+                          if (isOpenable) {
+                            _setDateOpened(index);
+                            _showConfettiDialog(context, date.openedText);
+                          }
+                        },
+                        boxColor: (isHovering) {
+                          if (isHovering) {
+                            return Colors.red.shade800;
+                          } else if (date.isOpened) {
+                            return Colors.red.shade900;
+                          } else {
+                            return Colors.red.shade700;
+                          }
+                        },
+                        borderColor: Colors.amber,
+                        child: Builder(builder: (context) {
+                          if (date.isOpened) {
+                            return const Icon(
+                              Icons.done_rounded,
+                              size: 30,
+                              color: Colors.amber,
+                            );
+                          } else {
+                            return Text(
+                              '${index + 1}',
+                              style: Styles$Texts.xxxlMedium.copyWith(
+                                color:
+                                    date.isOpened ? Colors.black : Colors.amber,
+                              ),
+                              textAlign: TextAlign.center,
+                            );
+                          }
+                        }),
+                      );
+                    },
+                  ),
                 ),
               ),
+            )
+          else
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    S.of(context).opensIn,
+                    style: Styles$Texts.mega.copyWith(color: Colors.amber),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 20),
+                  CountdownWidget(
+                    targetDate: DateTime(2023, 12, 1),
+                    currentDate: currentDate,
+                  ),
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );
@@ -227,6 +254,7 @@ class _CalendarViewState extends State<CalendarView> {
   dispose() {
     popupConfettiController.dispose();
     constantSnowController.dispose();
+    _timer.cancel();
     super.dispose();
   }
 }
@@ -275,5 +303,76 @@ class _CalendarBoxState extends State<CalendarBox> {
         ),
       ),
     );
+  }
+}
+
+class CountdownWidget extends StatefulWidget {
+  const CountdownWidget(
+      {super.key, required this.currentDate, required this.targetDate});
+
+  final DateTime targetDate;
+  final DateTime currentDate;
+
+  @override
+  State createState() => _CountdownWidgetState();
+}
+
+class _CountdownWidgetState extends State<CountdownWidget> {
+  Duration _remainingTime = const Duration();
+
+  @override
+  initState() {
+    super.initState();
+    _calculateCountdown();
+  }
+
+  @override
+  void didUpdateWidget(covariant CountdownWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _calculateCountdown();
+  }
+
+  void _calculateCountdown() {
+    Duration remainingTime = widget.targetDate.difference(widget.currentDate);
+
+    setState(() {
+      _remainingTime = remainingTime;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    int days = _remainingTime.inDays;
+    int hours = _remainingTime.inHours % 24;
+    int minutes = _remainingTime.inMinutes % 60;
+    int seconds = _remainingTime.inSeconds % 60;
+
+    return switch ((days, hours, minutes, seconds)) {
+      (0, 0, 0, 0) => Text(
+          '',
+          style: Styles$Texts.xxxlMedium.copyWith(color: Colors.amber),
+          textAlign: TextAlign.center,
+        ),
+      (0, 0, 0, _) => Text(
+          S.of(context).secondsRemaining(seconds),
+          style: Styles$Texts.xxxlMedium.copyWith(color: Colors.amber),
+          textAlign: TextAlign.center,
+        ),
+      (0, 0, _, _) => Text(
+          S.of(context).minutesRemaining(minutes, seconds),
+          style: Styles$Texts.xxxlMedium.copyWith(color: Colors.amber),
+          textAlign: TextAlign.center,
+        ),
+      (0, _, _, _) => Text(
+          S.of(context).hoursRemaining(hours, minutes, seconds),
+          style: Styles$Texts.xxxlMedium.copyWith(color: Colors.amber),
+          textAlign: TextAlign.center,
+        ),
+      (_, _, _, _) => Text(
+          S.of(context).allTimeRemaining(days, hours, minutes, seconds),
+          style: Styles$Texts.xxxlMedium.copyWith(color: Colors.amber),
+          textAlign: TextAlign.center,
+        )
+    };
   }
 }

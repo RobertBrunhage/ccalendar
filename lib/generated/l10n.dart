@@ -79,6 +79,56 @@ class S {
       args: [],
     );
   }
+
+  /// `{days} {days,plural, =1{day} other{days}} {hours} {hours,plural, =1{hour} other{hours}} {minutes} {minutes,plural, =1{minute} other{minutes}} {seconds} {seconds,plural, =1{second} other{seconds}}`
+  String allTimeRemaining(num days, num hours, num minutes, num seconds) {
+    return Intl.message(
+      '$days ${Intl.plural(days, one: 'day', other: 'days')} $hours ${Intl.plural(hours, one: 'hour', other: 'hours')} $minutes ${Intl.plural(minutes, one: 'minute', other: 'minutes')} $seconds ${Intl.plural(seconds, one: 'second', other: 'seconds')}',
+      name: 'allTimeRemaining',
+      desc: '',
+      args: [days, hours, minutes, seconds],
+    );
+  }
+
+  /// `{hours} {hours,plural, =1{hour} other{hours}} {minutes} {minutes,plural, =1{minute} other{minutes}} {seconds} {seconds,plural, =1{second} other{seconds}}`
+  String hoursRemaining(num hours, num minutes, num seconds) {
+    return Intl.message(
+      '$hours ${Intl.plural(hours, one: 'hour', other: 'hours')} $minutes ${Intl.plural(minutes, one: 'minute', other: 'minutes')} $seconds ${Intl.plural(seconds, one: 'second', other: 'seconds')}',
+      name: 'hoursRemaining',
+      desc: '',
+      args: [hours, minutes, seconds],
+    );
+  }
+
+  /// `{minutes} {minutes,plural, =1{minute} other{minutes}} {seconds} {seconds,plural, =1{second} other{seconds}}`
+  String minutesRemaining(num minutes, num seconds) {
+    return Intl.message(
+      '$minutes ${Intl.plural(minutes, one: 'minute', other: 'minutes')} $seconds ${Intl.plural(seconds, one: 'second', other: 'seconds')}',
+      name: 'minutesRemaining',
+      desc: '',
+      args: [minutes, seconds],
+    );
+  }
+
+  /// `{seconds} {seconds,plural, =1{second} other{seconds}}`
+  String secondsRemaining(num seconds) {
+    return Intl.message(
+      '$seconds ${Intl.plural(seconds, one: 'second', other: 'seconds')}',
+      name: 'secondsRemaining',
+      desc: '',
+      args: [seconds],
+    );
+  }
+
+  /// `First box can be opened in`
+  String get opensIn {
+    return Intl.message(
+      'First box can be opened in',
+      name: 'opensIn',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
