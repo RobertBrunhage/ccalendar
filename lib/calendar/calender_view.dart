@@ -30,40 +30,91 @@ class _CalendarViewState extends State<CalendarView> {
 
   List<Box> boxes = [
     Box(
-        openedText:
-            '**15% off** on all avatars on [Gumroad](https://artofnessa.gumroad.com/).\n\nUse code **Advent1** on checkout. **Only 5 slots** '),
-    Box(openedText: '15% off total price on commission 2 slots'),
+      openedText:
+          '**15% off** on all avatars on [Gumroad](https://artofnessa.gumroad.com/).\n\nUse code **Advent1** on checkout.\n\nOnly 5 slots',
+    ),
     Box(
-        openedText:
-            'Free emotes when ordering a commission 2 slots (limited to 5 emotes)'),
+      openedText:
+          '**15% off** total price on any [commission](https://forms.gle/tFJcQSsL2QXJqCzz6)\n\n3 slots',
+    ),
     Box(
-        openedText:
-            'Free extra Christmas ugly sweater toggle VRChat avatar 1 slot'),
-    Box(openedText: '\$40 Mystery box day! (bust sculpt render) 3 slots'),
+      openedText:
+          '**Free expressions** when ordering a [commission](https://forms.gle/tFJcQSsL2QXJqCzz6)\n\n2 slots (limited to 5 emotes)',
+    ),
     Box(
-        openedText:
-            'Free holiday-themed accessories/expressions for VTubers/VRChat avatars 2 slots'),
-    Box(openedText: 'Fullbody sculpts 2 slots'),
-    Box(openedText: 'Free VTuber setup for VRChat avatars 2 slots'),
-    Box(openedText: 'Sale on gumroad 25% off on 5 avatars'),
+      openedText:
+          '**Free extra christmas ugly sweater** toggle vrchat avatar [commission](https://forms.gle/tFJcQSsL2QXJqCzz6)\n\n1 slot',
+    ),
     Box(
-        openedText:
-            '\$60 Mystery box day! (Lowpoly model of your sona render + files)'),
-    Box(openedText: '20% off total price on commission 1 slot'),
-    Box(openedText: '50% off total price on base gremlin VTuber 1 slot'),
-    Box(openedText: '\$100 Lowpoly model 2 slots (renders)'),
-    Box(openedText: ''),
-    Box(openedText: ''),
-    Box(openedText: ''),
+      openedText:
+          '**Limited** \$40 [Bust sculpt commissions](https://forms.gle/hugrCHiiWhK1gg1p7)\n\n4 slots',
+    ),
     Box(
-        openedText:
-            '\$100 Mystery box day! (1 free VRChat avatar,1 fullbody sculpt) 2 slots'),
-    Box(openedText: '\$300 Lowpoly VTuber avatar 1 slot'),
-    Box(openedText: '30% off total price on commission 1 slot'),
-    Box(openedText: ''),
-    Box(openedText: ''),
-    Box(openedText: ''),
-    Box(openedText: ''),
+      openedText:
+          '**Free holiday-themed** accessories/expressions for vtubers/vrchat avatar [commissions](https://forms.gle/tFJcQSsL2QXJqCzz6)\n\n2 slots',
+    ),
+    Box(
+      openedText:
+          '**Limited** [Fullbody sculpt commissions](https://forms.gle/hugrCHiiWhK1gg1p7)\n\n2 slots',
+    ),
+    Box(
+      openedText:
+          '**Free vtuber setup** for vrchat avatar [commissions](https://forms.gle/tFJcQSsL2QXJqCzz6)\n\n2 slots',
+    ),
+    Box(
+      openedText:
+          '**25% off** on all avatars on [Gumroad](https://artofnessa.gumroad.com/).\n\nUse code **Advent9** on checkout. \n\nOnly 5 slots',
+    ),
+    Box(
+      openedText:
+          '\$80 [Mystery box day](https://forms.gle/GBqNVnDs7AxrUubJ7)\n\n2 slots',
+    ),
+    Box(
+      openedText:
+          '**20% off** total price on [commissions](https://forms.gle/tFJcQSsL2QXJqCzz6)\n\n2 slots',
+    ),
+    Box(
+      openedText:
+          '**50% off** total price on base gremlin vtuber commissions [commissions](https://forms.gle/tFJcQSsL2QXJqCzz6)\n\n1 slot',
+    ),
+    Box(
+      openedText:
+          '**Limited** \$100 Lowpoly model [commissions](https://forms.gle/Zx2FnABEwZxXuWbw6)\n\n2 slots',
+    ),
+    Box(openedText: '\$60 **Mystery Box**\n\n1 slot DM to claim'),
+    Box(
+      openedText:
+          '**50% off** base price on halfbody Vtuber [commissions](https://forms.gle/tFJcQSsL2QXJqCzz6)\n\n2 slots',
+    ),
+    Box(openedText: '\$60 **Mystery Box**\n\n1st DM to claim'),
+    Box(
+      openedText:
+          '\$100 [Mystery box day!](https://forms.gle/sXDPNw7pfKgncSmK7)\n\n2 slots',
+    ),
+    Box(
+      openedText:
+          '**30% off** total price on all [commissions](https://forms.gle/tFJcQSsL2QXJqCzz6)\n\n1 slot',
+    ),
+    Box(
+      openedText:
+          '**35% off** total price on all [commission](https://forms.gle/tFJcQSsL2QXJqCzz6)\n\n2 slots',
+    ),
+    Box(
+      openedText:
+          '\$40 [Mystery box day!](https://forms.gle/4W9ksguqKZrppExFA)\n\n3 slots',
+    ),
+    Box(
+      openedText:
+          '\$200 **Limited** Custom Vtuber on the [Sakura Wolf base](https://ko-fi.com/s/ae6db2cddd) \n\n1 slot',
+    ),
+    Box(
+      openedText:
+          '**Limited** \$200+ **silly feral vtuber** [commissions](https://forms.gle/Qjw4qb6MEzgRm2YLA)\n\n2 slots',
+    ),
+    Box(
+      openedText:
+          '**30% off** base price for VRChat avatar [commissions](https://forms.gle/tFJcQSsL2QXJqCzz6)\n\n2 slots',
+    ),
     Box(openedText: 'Lunette 2.0 release + BIG sale 10 avatars'),
     Box(openedText: 'Lunette 2.0 release + smaller sale 15 avatars'),
   ];
@@ -110,18 +161,24 @@ class _CalendarViewState extends State<CalendarView> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  child: MarkdownBody(
+                Container(
+                  constraints: const BoxConstraints(
+                    maxWidth: 400,
+                  ),
+                  child: Markdown(
                     data: text,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     onTapLink: (text, href, title) {
                       openUrl(href);
                     },
                     selectable: true,
                     styleSheet: MarkdownStyleSheet(
+                      textAlign: WrapAlignment.center,
                       p: Styles$Texts.xlNormal.copyWith(
                         color: Styles$Colors.black100,
                       ),
-                      a: Styles$Texts.xlNormal.copyWith(
+                      a: Styles$Texts.xlMedium.copyWith(
                         color: Colors.blue,
                       ),
                       strong: Styles$Texts.xlMedium.copyWith(
