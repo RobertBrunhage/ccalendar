@@ -79,10 +79,18 @@ class Styles$Texts {
     color: Styles$Colors.black100,
   );
 
+
+  /// fontsize: 22
+  static const TextStyle xlNormal = TextStyle(
+    fontSize: 22,
+    fontWeight: FontWeight.w400,
+    color: Styles$Colors.black100,
+  );
+
   /// fontsize: 22 bold
   static const TextStyle xlMedium = TextStyle(
     fontSize: 22,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.bold,
     color: Styles$Colors.black100,
   );
 

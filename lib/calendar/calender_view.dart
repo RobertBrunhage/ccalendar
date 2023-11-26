@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:ccalender/core/utils.dart';
 import 'package:ccalender/generated/l10n.dart';
 import 'package:ccalender/ui_library/styles.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,7 +29,9 @@ class _CalendarViewState extends State<CalendarView> {
   DateTime currentDate = DateTime.now();
 
   List<Box> boxes = [
-    Box(openedText: 'Sale on gumroad 15% off on 5 avatars'),
+    Box(
+        openedText:
+            '**15% off** on all avatars on [Gumroad](https://artofnessa.gumroad.com/).\n\nUse code **Advent1** on checkout. **Only 5 slots** '),
     Box(openedText: '15% off total price on commission 2 slots'),
     Box(
         openedText:
@@ -98,14 +102,33 @@ class _CalendarViewState extends State<CalendarView> {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14.0),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  text,
-                  style: Styles$Texts.xlMedium,
+                SizedBox(
+                  child: MarkdownBody(
+                    data: text,
+                    onTapLink: (text, href, title) {
+                      openUrl(href);
+                    },
+                    selectable: true,
+                    styleSheet: MarkdownStyleSheet(
+                      p: Styles$Texts.xlNormal.copyWith(
+                        color: Styles$Colors.black100,
+                      ),
+                      a: Styles$Texts.xlNormal.copyWith(
+                        color: Colors.blue,
+                      ),
+                      strong: Styles$Texts.xlMedium.copyWith(
+                        color: Styles$Colors.black100,
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 20.0),
                 ConfettiWidget(
@@ -115,6 +138,11 @@ class _CalendarViewState extends State<CalendarView> {
                   colors: const [Colors.amber, Colors.green],
                 ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
                   onPressed: () {
                     popupConfettiController.stop();
                     Navigator.of(context).pop();
