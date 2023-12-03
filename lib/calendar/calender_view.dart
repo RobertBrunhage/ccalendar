@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:ccalender/core/utils.dart';
 import 'package:ccalender/generated/l10n.dart';
+import 'package:ccalender/main.dart';
 import 'package:ccalender/ui_library/styles.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
@@ -126,6 +127,7 @@ class _CalendarViewState extends State<CalendarView> {
   @override
   void initState() {
     super.initState();
+    context.read<FirebaseAnalyticsIntegration>().logScreen('Calendar Screen');
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         currentDate = DateTime.now();
@@ -170,6 +172,13 @@ class _CalendarViewState extends State<CalendarView> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     onTapLink: (text, href, title) {
+                      context.read<FirebaseAnalyticsIntegration>().logEvent(
+                        'outbound_link',
+                        {
+                          'url': href,
+                          'title': title,
+                        },
+                      );
                       openUrl(href);
                     },
                     selectable: true,
@@ -275,6 +284,14 @@ class _CalendarViewState extends State<CalendarView> {
                         onTap: () {
                           if (isOpenable) {
                             _setDateOpened(index);
+                            context
+                                .read<FirebaseAnalyticsIntegration>()
+                                .logEvent(
+                              'open_box',
+                              {
+                                'box': index + 1,
+                              },
+                            );
                             _showConfettiDialog(context, date.openedText);
                           }
                         },

@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:ccalender/calendar/calender_view.dart';
+import 'package:ccalender/firebase_options.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,7 +13,13 @@ import 'package:ccalender/ui_library/styles.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.web,
+  );
+
   runApp(const AppInitializer());
 }
 
@@ -78,6 +87,12 @@ class _AppInitializerState extends State<AppInitializer> {
                 Provider<SharedPreferences>(
                   create: (BuildContext context) => prefs!,
                 ),
+                Provider<FirebaseAnalyticsIntegration>(
+                  create: (context) {
+                    final analytics = FirebaseAnalytics.instance;
+                    return FirebaseAnalyticsIntegration(analytics);
+                  },
+                ),
               ],
               child: const ThemedApp(
                 home: CalendarView(),
@@ -128,5 +143,21 @@ class ThemedApp extends StatelessWidget {
       ),
       home: home,
     );
+  }
+}
+
+class FirebaseAnalyticsIntegration {
+  FirebaseAnalyticsIntegration(this.analytics) {
+    analytics.setAnalyticsCollectionEnabled(kReleaseMode);
+  }
+
+  final FirebaseAnalytics analytics;
+
+  Future<void> logEvent(String name, Map<String, dynamic> parameters) async {
+    await analytics.logEvent(name: name, parameters: parameters);
+  }
+
+  Future<void> logScreen(String name) async {
+    await analytics.setCurrentScreen(screenName: name);
   }
 }
