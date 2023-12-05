@@ -127,7 +127,7 @@ class _CalendarViewState extends State<CalendarView> {
   @override
   void initState() {
     super.initState();
-    context.read<FirebaseAnalyticsIntegration>().logScreen('Calendar Screen');
+    context.read<PosthogAnalyticsIntegration>().logScreen('Calendar Screen');
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         currentDate = DateTime.now();
@@ -172,7 +172,7 @@ class _CalendarViewState extends State<CalendarView> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     onTapLink: (text, href, title) {
-                      context.read<FirebaseAnalyticsIntegration>().logEvent(
+                      context.read<PosthogAnalyticsIntegration>().logEvent(
                         'outbound_link',
                         {
                           'url': href,
@@ -285,7 +285,7 @@ class _CalendarViewState extends State<CalendarView> {
                           if (isOpenable) {
                             _setDateOpened(index);
                             context
-                                .read<FirebaseAnalyticsIntegration>()
+                                .read<PosthogAnalyticsIntegration>()
                                 .logEvent(
                               'open_box',
                               {

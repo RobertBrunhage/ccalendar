@@ -8,8 +8,6 @@ environment:
 
 dependencies:
   confetti: ^0.7.0
-  firebase_analytics: ^10.7.2
-  firebase_core: ^2.24.0
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -18,6 +16,7 @@ dependencies:
   integration_test:
     sdk: flutter
   logging: ^1.2.0
+  posthog_flutter: ^3.3.0
   provider: ^6.0.5
   shared_preferences: ^2.2.2
   url_launcher: ^6.2.1
