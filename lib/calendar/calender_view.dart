@@ -116,8 +116,8 @@ class _CalendarViewState extends State<CalendarView> {
       openedText:
           '**30% off** base price for VRChat avatar [commissions](https://forms.gle/tFJcQSsL2QXJqCzz6)\n\n2 slots',
     ),
-    Box(openedText: 'Lunette 2.0 release + BIG sale 10 avatars'),
-    Box(openedText: 'Lunette 2.0 release + smaller sale 15 avatars'),
+    Box(openedText: 'YCH 3 slots [DM me](https://x.com/artofnessa)'),
+    Box(openedText: 'YCH Raffle [twitter](https://x.com/artofnessa)'),
   ];
 
   final popupConfettiController =
